@@ -1,111 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const main = document.querySelector("main");
-    const overlay = document.getElementById("overlay");
 
-    await loadStartWindow();
+    loadMovies();
 
-    document.querySelectorAll("header a").forEach(link => {
-        link.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const url = e.target.getAttribute("href");
-
-            overlay.style.display = "none";
-
-            await loadContent(url);
-        });
-    });
-
-    async function loadStartWindow() {
-        try {
-            const response = await fetch("/views/start.html");
-            const htmlText = await response.text();
-
-            const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = htmlText;
-
-            const startWindow = tempDiv.querySelector("#start-window");
-
-            if (startWindow) {
-                main.appendChild(startWindow);
-                overlay.style.display = "block";
-
-                startWindow.querySelector("#introduction")?.addEventListener("click", async () => {
-                    await loadContent("introduction.html");
-                    closeStartWindow(startWindow);
-                });
-
-                startWindow.querySelector("#cartel")?.addEventListener("click", async () => {
-                    await loadContent("cartel.html");
-                    closeStartWindow(startWindow);
-                });
-
-                startWindow.querySelector("#contact")?.addEventListener("click", async () => {
-                    await loadContent("contact.html");
-                    closeStartWindow(startWindow);
-                });
-
-                document.querySelector(".btn-principal")?.addEventListener("click", () => {
-                    alert("Log In pulsado");
-                });
-
-                startWindow.querySelector(".btn-principal")?.addEventListener("click", () => {
-                    alert("Log In pulsado");
-                });
-
-            } else {
-                console.error("No se encontró #start-window en start.html");
-            }
-        } catch (error) {
-            console.error("Error al cargar start.html:", error);
-        }
-    }
-
-    async function loadContent(url) {
-        try {
-            const response = await fetch(`/views/${url}`);
-            const htmlText = await response.text();
-
-            const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = htmlText;
-
-            const bodyContent = tempDiv.querySelector("body") || tempDiv;
-
-            main.innerHTML = bodyContent.innerHTML;
-
-            updateSectionTitle(url);
-
-            if (url === "cartel.html") {
-                loadMovies();
-            }
-
-        } catch (error) {
-            console.error("Error al cargar el contenido:", error);
-            main.innerHTML = "<p class='text-danger'>Error al cargar el contenido.</p>";
-        }
-    }
-
-    function updateSectionTitle(url) {
-        const sectionTitle = document.getElementById("section-title");
-        const sectionSubtitle = document.getElementById("section-subtitle");
-
-        switch (url) {
-            case "introduction.html":
-                sectionTitle.textContent = "Nuestro cine";
-                sectionSubtitle.textContent = "Descubre la experiencia Cinefusion.";
-                break;
-            case "cartel.html":
-                sectionTitle.textContent = "Cartelera";
-                sectionSubtitle.textContent = "Las mejores películas las tienes en cinefusion.";
-                break;
-            case "contact.html":
-                sectionTitle.textContent = "Contacto";
-                sectionSubtitle.textContent = "Estamos aquí para ayudarte.";
-                break;
-            default:
-                sectionTitle.textContent = "Sección";
-                sectionSubtitle.textContent = "";
-        }
-    }
+}); 
 
     function loadMovies() {
         fetch('./json/movies.json')
@@ -122,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const movieCard = document.createElement('div');
                     movieCard.classList.add('p-3', 'position-relative', 'card-cartel');
                     movieCard.id = movie.id;
+                    movieCard.setAttribute('x-on:click', "tab = 'tickets'");
 
                     movieCard.innerHTML = `
                         <div class="imagen-hover-container">
@@ -136,10 +34,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                     container.appendChild(movieCard);
 
-                    movieCard.addEventListener("click", async function () {
-                        await loadContent("tickets.html");
-                        loadMovieInfo(movie.id);
-                    });
+                    movieCard.addEventListener('click', () =>
+                    loadMovieInfo(movie.id)
+                    );
+
+
                 });
             })
             .catch(error => {
@@ -184,12 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 console.error('Error al procesar el JSON:', error);
             });
     }
-}); 
 
-function closeStartWindow(startWindow) {
-    startWindow.remove();
-    overlay.style.display = "none";
-}
 
 function loadSessions(id) {
     const url = `./json/sessions.json`;

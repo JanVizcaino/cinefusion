@@ -11,53 +11,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
     <script src="scripts/site.js" defer></script>
+    <script src="scripts/styles.js" defer></script>
     <title>cinefusion</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
-<body>
-    <header class="d-flex justify-content-between align-items-center p-3">
-        <div>
-            <img src="media/logos/simple-black.png" class="logo-header">
-        </div>
-        <div>
-            <ul class="nav d-flex justify-content-between gap-5">
-                <li><a href="introduction.html">Nuestro cine</a></li>
-                <li><a href="cartel.html">Cartelera</a></li>
-                <li><a href="contact.html">Contacto</a></li>
-            </ul>
-        </div>
-        <div>
-            <button class="btn-principal d-flex gap-2 align-items-center justify-content-center" type="button">
-                <i class="fa-solid fa-user"></i><span class="d-none d-md-inline">Log In</span>
-            </button>
-        </div>
-    </header>
-
-    <div id="cover-image">
-        <div class="d-flex flex-column justify-content-center align-items-center text-center h-100">
-            <h1 id="section-title"><img src="/media/logos/min-gold.png"></h1>
-            <h5 id="section-subtitle"></h5>
-        </div>
-    </div>
-
-    <div id="overlay" class="overlay" style="display: none;"></div>
+<body x-data="{ tab: 'home' }">
+    <nav>
+        <button @click="tab = 'home'">Inicio</button>
+        <button @click="tab = 'cartelera'">Cartelera</button>
+        <button @click="tab = 'contact'">Contacto</button>
+    </nav>
 
     <main>
-        
+        <section x-show="tab === 'home'" x-transition x-cloak>
+            <div class="container d-flex align-items-center justify-content-center vh-100 text-white">
+                <div class="row">
+                    <div class="col-8">
+                    <h1>CINEFUSION</h1>
+                    <h3>Si una imagen vale más que mil palabras... ¿cuánto vale una película?</h3>
+                    <p>¡Descúbrelo aquí!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section x-show="tab === 'cartelera'" x-transition x-cloak>
+            <section id="sectionPin">
+                <div class="pin-wrap-sticky">
+                    <div class="pin-wrap" id="grid-cartel">
+
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section x-show="tab === 'contact'" x-transition x-cloak>
+
+        </section>
+
+        <section x-show="tab === 'tickets'">
+            <div class="container mb-5">
+                <h1 class="text-left mt-5" id="movie-title"></h1>
+                <div class="row mt-5">
+                    <div class="col-12 d-flex gap-5 pb-5">
+                        <img id="movie-img" src="" style="max-height: 550px;">
+                        <div>
+                            <p id="movie-description">
+
+                            </p>
+                            <div>
+                                <p>Director: <span id="movie-director"></span></p>
+                                <p>Duración: <span id="movie-duration"></span></p>
+                                <p>Reparto: <span id="movie-casting"></span></p>
+                            </div>
+                            <div>
+                                <h3 class="pt-5">Sesiones disponibles</h3>
+                                <div class="grid-sessions" id="grid-sessions">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="row mt-5" id="sit-rows" style="display: none;">
+                    <h1>Selecciona tu asiento</h1>
+                    <div id="sit-grid" class="sit-grid p-5">
+
+                    </div>
+                    <div class="text-center mt-4 p-2" style="background-color: gray; border-radius: 0px 0px 10px 10px;">
+                        <h4 class="m-0">Pantalla</h4>
+                    </div>
+
+                </div>
+        </section>
     </main>
-
-    <footer class="d-flex justify-content-between align-items-center p-5">
-        <div>
-            <ul class="list-unstyled d-flex flex-column justify-content-center gap-3 m-0">
-                <li><a>Cinefusion S.A 2025 ©</a></li>
-                <li><a>Política de cookies y privacidad.</a></li>
-            </ul>
-        </div>
-        <div>
-            <img src="media/logos/may-black.png" alt="Logo" class="logo-footer">
-        </div>
-    </footer>
 </body>
-
 
 </html>

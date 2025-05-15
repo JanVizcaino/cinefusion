@@ -1,0 +1,48 @@
+{
+    "rooms": [
+      {
+        "id": 1,
+        "name": "Sala 1",
+        "rows": 8,
+        "cols": 10,
+        "totalSeats": 80
+      },
+      {
+        "id": 2,
+        "name": "Sala 2",
+        "rows": 6,
+        "cols": 12,
+        "totalSeats": 72
+      },
+      {
+        "id": 3,
+        "name": "Sala 3",
+        "rows": 10,
+        "cols": 10,
+        "totalSeats": 100
+      },
+      {
+        "id": 4,
+        "name": "Sala 4",
+        "rows": 5,
+        "cols": 8,
+        "totalSeats": 40
+      }
+      ,
+      {
+        "id": 5,
+        "name": "Sala 5",
+        "rows": 5,
+        "cols": 8,
+        "totalSeats": 40
+      },
+      {
+        "id": 6,
+        "name": "Sala 6",
+        "rows": 5,
+        "cols": 10,
+        "totalSeats": 70
+      }
+    ]
+  }
+  
