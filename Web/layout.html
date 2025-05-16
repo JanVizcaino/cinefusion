@@ -28,17 +28,30 @@
             <div class="container d-flex align-items-center justify-content-center vh-100 text-white">
                 <div class="row">
                     <div class="col-8">
-                    <h1>CINEFUSION</h1>
-                    <h3>Si una imagen vale más que mil palabras... ¿cuánto vale una película?</h3>
-                    <p>¡Descúbrelo aquí!</p>
+                        <img src="media/logos/min-gold.png">
+                        <h3>Si una imagen vale más que mil palabras... ¿cuánto vale una película?</h3>
+                        <p>¡Descúbrelo aquí!</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section x-show="tab === 'cartelera'" x-transition x-cloak>
+            <div class="container d-flex align-items-center justify-content-center vh-100 text-white">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="titulo-pricipal">CINEFUSION</h1>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3>Descúbre nuestra <br> cartelera</h3> <a onclick="document.getElementById('sectionPin').scrollIntoView({ behavior: 'smooth' });" ><i class="button-arrow">↓</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <section id="sectionPin">
                 <div class="pin-wrap-sticky">
+                    <div id="cartel-header">
+                        <h1 class="text-white">CARTELERA</h1>
+                    </div>
                     <div class="pin-wrap" id="grid-cartel">
 
                     </div>
@@ -51,7 +64,7 @@
         </section>
 
         <section x-show="tab === 'tickets'">
-            <div class="container mb-5">
+            <div class="container mb-5 text-white">
                 <h1 class="text-left mt-5" id="movie-title"></h1>
                 <div class="row mt-5">
                     <div class="col-12 d-flex gap-5 pb-5">
@@ -87,6 +100,7 @@
                 </div>
         </section>
     </main>
+    
 </body>
 
 </html>

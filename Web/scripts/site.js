@@ -120,7 +120,7 @@ function loadSessions(id) {
 
                         date.times.forEach(time => {
                             const sessionCard = document.createElement("div");
-                            sessionCard.classList.add("grid-sessions-card", "d-flex", "justify-content-center", "align-items-center");
+                            sessionCard.classList.add("grid-sessions-card", "d-flex", "justify-content-center", "align-items-center", "text-black");
                             sessionCard.innerHTML = `<p>${time}</p>`;
 
                             sessionCard.addEventListener("click", () => {

@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #B22222;
+    --primary-color: #9c8500;
     --secondary-color: #F5F5F5;
-    --terciary-color: #9c8500;
+    --terciary-color: #8b1515; 
     --text-color: #333333;
     --font-family: 'Raleway', sans-serif;
 }
@@ -9,6 +9,8 @@
 [x-cloak] {
     display: none;
 }
+
+
 
 #backgroundVideo {
     position: fixed;
@@ -36,6 +38,15 @@ body {
     font-family: var(--font-family) !important;
     margin: 0;
     overflow-x: hidden;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+section{
+    max-width: 80vw;
 }
 
 nav {
@@ -72,6 +83,107 @@ nav button:focus {
     color: #ccc; 
 }
 
+a{
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.titulo-pricipal {
+    font-size: 4rem;
+    font-weight: 700;
+    color: white;
+}
+
+.grid-sessions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.session-time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.grid-sessions-card {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.session-date{
+    margin-top: 20px;
+}
+
+.grid-sessions-card p{
+    margin: 0 !important;
+}
+
+.grid-sessions-card:hover {
+    background-color: #ddd;
+}
+
+.sit-grid {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+}
+
+.button-arrow{
+    background-color: #8b1515;
+    padding: 20px 30px;
+    font-size: 1.5rem;
+}
+
+
+/*PRUEBAS*/
+
+#cartel-header{
+    height: 150px;
+    display: flex;
+    align-items: end;
+}
+
+
+@keyframes move {
+	to {
+		/* Move horizontally so that right edge is aligned against the viewport */
+		transform: translateX(calc(-100% + 80vw));
+	}
+}
+
+#sectionPin {
+	/* Stretch it out, so that we create room for the horizontal scroll animation */
+	height: 500vh;
+	overflow: visible; /* To make position sticky work … */
+
+	view-timeline-name: --section-pin-tl;
+	view-timeline-axis: block;
+}
+
+.pin-wrap-sticky {
+	height: 100vh;
+	position: sticky;
+	top: 0;
+	width: 100vw;
+	overflow-x: hidden;
+}
+
+.pin-wrap {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    animation: linear move forwards;
+    will-change: transform;
+
+    animation-timeline: --section-pin-tl;
+    animation-range: contain 0% contain 100%;
+}
+
 
 .imagen-hover-container {
     position: relative;
@@ -105,79 +217,44 @@ nav button:focus {
     font-size: 2rem;
 }
 
-.grid-sessions {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+
+.card-cartel {
+    margin: 10px;
+    flex-shrink: 0; /* Evita que se encoja en scroll horizontal */
 }
 
-.session-time-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
-    margin-top: 10px;
+.image-container-movie {
+    width: 400px; /* o lo que prefieras */
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0; /* Importante para scroll horizontal */
 }
 
-.grid-sessions-card {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.image-container-movie img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Rellena el contenedor sin deformar */
+    display: block;
 }
 
-.grid-sessions-card:hover {
-    background-color: #ddd;
+html, body {
+  height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
 }
 
-.sit-grid {
-    display: grid;
-    gap: 10px;
-    justify-content: center;
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
-.image-container-movie{
-    max-height: 300px;
-}
-
-/*PRUEBAS*/
-
-@keyframes move {
-	to {
-		/* Move horizontally so that right edge is aligned against the viewport */
-		transform: translateX(calc(-100% + 100vw));
-	}
-}
-
-#sectionPin {
-	/* Stretch it out, so that we create room for the horizontal scroll animation */
-	height: 500vh;
-	overflow: visible; /* To make position sticky work … */
-
-	view-timeline-name: --section-pin-tl;
-	view-timeline-axis: block;
-}
-
-.pin-wrap-sticky {
-	/* Stick to Top */
-	height: 100vh;
-	width: 100vw;
-	position: sticky;
-	top: 0;
-
-	width: 100vw;
-	overflow-x: hidden;
-}
-
-.pin-wrap {
-    display: flex;
-	width: 250vmax;
-
-	/* Hook animation */
-	will-change: transform;
-	animation: linear move forwards;
-
-	/* Link animation to view-timeline */
-	animation-timeline: --section-pin-tl;
-	animation-range: contain 0% contain 100%;
+.snap-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
