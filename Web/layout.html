@@ -27,13 +27,20 @@
         <section x-show="tab === 'home'" x-transition x-cloak>
             <div class="container d-flex align-items-center justify-content-center vh-100 text-white">
                 <div class="row">
-                    <div class="col-8">
-                        <img src="media/logos/min-gold.png">
-                        <h3>Si una imagen vale más que mil palabras... ¿cuánto vale una película?</h3>
-                        <p>¡Descúbrelo aquí!</p>
+                    <div class="col-12">
+                        <h1 class="titulo-pricipal">CINEFUSION</h1>
+                        <div class="d-flex justify-content-between align-items-center gap-3">
+                            <h3>Si una imagen vale más que mil palabras... <br> ¿cuánto vale una película?</h3>
+                            <a onclick="document.getElementById('sectionPin').scrollIntoView({ behavior: 'smooth' });"><i
+                                    class="button-arrow">↓</i></a>
+                        </div>
+
                     </div>
                 </div>
             </div>
+            <section>
+
+            </section>
         </section>
 
         <section x-show="tab === 'cartelera'" x-transition x-cloak>
@@ -42,7 +49,9 @@
                     <div class="col-12">
                         <h1 class="titulo-pricipal">CINEFUSION</h1>
                         <div class="d-flex justify-content-between align-items-center">
-                            <h3>Descúbre nuestra <br> cartelera</h3> <a onclick="document.getElementById('sectionPin').scrollIntoView({ behavior: 'smooth' });" ><i class="button-arrow">↓</i></a>
+                            <h3>Descúbre nuestra <br> cartelera</h3> <a
+                                onclick="document.getElementById('sectionPin').scrollIntoView({ behavior: 'smooth' });"><i
+                                    class="button-arrow">↓</i></a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +69,30 @@
         </section>
 
         <section x-show="tab === 'contact'" x-transition x-cloak>
-
+            <div class="d-flex align-items-center justify-content-center vh-100 text-white">
+                <div class="container">
+                    <h2 class="text-center mb-4">Contáctanos</h2>
+                    <form class="mx-auto" style="width: 500px;">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Tu nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="correo" placeholder="Tu correo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" rows="4" placeholder="Tu mensaje"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn text-white"
+                                style="background-color: var(--terciary-color);">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
         </section>
 
         <section x-show="tab === 'tickets'">
@@ -100,7 +132,7 @@
                 </div>
         </section>
     </main>
-    
+
 </body>
 
 </html>
