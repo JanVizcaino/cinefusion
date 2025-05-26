@@ -2,87 +2,88 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     loadMovies();
 
-}); 
+});
 
-    function loadMovies() {
-        fetch('./json/movies.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar el JSON');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const container = document.getElementById('grid-cartel');
+function loadMovies() {
+    fetch('./json/movies.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar el JSON');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const container = document.getElementById('grid-cartel');
 
-                data.movies.forEach(movie => {
-                    const movieCard = document.createElement('div');
-                    movieCard.classList.add('p-3', 'position-relative', 'card-cartel');
-                    movieCard.id = movie.id;
-                    movieCard.setAttribute('x-on:click', "tab = 'tickets'");
+            data.movies.forEach(movie => {
+                const movieCard = document.createElement('div');
+                movieCard.className = `
+                relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 group
+                w-full max-w-xs bg-gray-800
+                `;
+                movieCard.id = movie.id;
+                movieCard.setAttribute('x-on:click', "tab = 'tickets'");
 
-                    movieCard.innerHTML = `
-                        <div class="imagen-hover-container">
-                                <div class="image-container-movie">
-                                    <img src="${movie.image}" onerror="this.src='./media/generic.png'" alt="${movie.title}">
-                                </div>
-                                <div class="overlay-movie">
-                                    <h5 class="titulo">${movie.title}</h5>
-                                </div>
-                            </div>
+                movieCard.innerHTML = `
+                    <div class="w-full aspect-[2/3] relative">
+                        <img src="${movie.image}" onerror="this.src='./media/generic.png'" alt="${movie.title}"
+                            class="w-full h-full object-cover object-center transition-opacity duration-300 group-hover:opacity-70" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <h5 class="text-white text-4xl font-semibold">${movie.title}</h5>
+                        </div>
+                    </div>
                     `;
 
-                    container.appendChild(movieCard);
+                container.appendChild(movieCard);
 
-                    movieCard.addEventListener('click', () =>
-                    loadMovieInfo(movie.id)
-                    );
+                movieCard.addEventListener('click', () => loadMovieInfo(movie.id));
 
 
-                });
-            })
-            .catch(error => {
-                console.error('Error al procesar el JSON:', error);
+
             });
-    }
+        })
+        .catch(error => {
+            console.error('Error al procesar el JSON:', error);
+        });
+}
 
-    async function loadMovieInfo(id) {
-        const url = `./json/movies.json`;
-    
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar el JSON');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const movie = data.movies.find(m => m.id === id);
-                if (!movie) {
-                    throw new Error(`No se encontró la película con id ${id}`);
-                }
-    
-                const movieTitle = document.getElementById("movie-title");
-                const movieImg = document.getElementById("movie-img");
-                const movieDescription = document.getElementById("movie-description");
-                const movieDirector = document.getElementById("movie-director");
-                const movieDuration = document.getElementById("movie-duration");
-                const movieCasting = document.getElementById("movie-casting");
-    
-                movieTitle.innerHTML = movie.title;
-                movieImg.src = movie.image;
-                movieDescription.innerHTML = movie.description;
-                movieDirector.innerHTML = movie.director;
-                movieDuration.innerHTML = movie.duration;
-                movieCasting.innerHTML = movie.casting;
-    
-                loadSessions(id);
-    
-            })
-            .catch(error => {
-                console.error('Error al procesar el JSON:', error);
-            });
-    }
+async function loadMovieInfo(id) {
+    const url = `./json/movies.json`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar el JSON');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const movie = data.movies.find(m => m.id === id);
+            if (!movie) {
+                throw new Error(`No se encontró la película con id ${id}`);
+            }
+
+            const movieTitle = document.getElementById("movie-title");
+            const movieImg = document.getElementById("movie-img");
+            const movieDescription = document.getElementById("movie-description");
+            const movieDirector = document.getElementById("movie-director");
+            const movieDuration = document.getElementById("movie-duration");
+            const movieCasting = document.getElementById("movie-casting");
+
+            movieTitle.innerHTML = movie.title;
+            movieImg.src = movie.image;
+            movieDescription.innerHTML = movie.description;
+            movieDirector.innerHTML = movie.director;
+            movieDuration.innerHTML = movie.duration;
+            movieCasting.innerHTML = movie.casting;
+
+            loadSessions(id);
+
+        })
+        .catch(error => {
+            console.error('Error al procesar el JSON:', error);
+        });
+}
 
 
 function loadSessions(id) {
@@ -144,7 +145,7 @@ function loadSessions(id) {
 }
 
 
-function loadSits(roomId){
+function loadSits(roomId) {
     const url = `./json/rooms.json`;
     const sitGrid = document.getElementById("sit-grid");
 
@@ -158,7 +159,7 @@ function loadSits(roomId){
         .then(data => {
             sitGrid.innerHTML = "";
 
-            const salaInfo = data.rooms.find(r => r.id === roomId); 
+            const salaInfo = data.rooms.find(r => r.id === roomId);
 
             sitGrid.style.gridTemplateColumns = `repeat(${salaInfo.cols}, minmax(30px, 1fr))`;
 
