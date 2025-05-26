@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     movieCard.innerHTML = `
                         <div class="imagen-hover-container">
                                 <div class="image-container-movie">
-                                    <img src="${movie.image}" onerror="this.src='../media/generic.png'" alt="${movie.title}">
+                                    <img src="${movie.image}" onerror="this.src='./media/generic.png'" alt="${movie.title}">
                                 </div>
                                 <div class="overlay-movie">
                                     <h5 class="titulo">${movie.title}</h5>
