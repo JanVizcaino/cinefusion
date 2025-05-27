@@ -4,60 +4,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/site.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
-    <script src="scripts/site.js" defer></script>
     <title>cinefusion</title>
+    <script src="scripts/site.js" defer></script>
+    <script src="scripts/styles.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="./scripts/alpine.js" defer></script>
+    <link rel="stylesheet" href="./css/output.css">
 </head>
 
-<body>
-    <header class="d-flex justify-content-between align-items-center p-3">
-        <div>
-            <img src="media/logos/simple-black.png" class="logo-header">
-        </div>
-        <div>
-            <ul class="nav d-flex justify-content-between gap-5">
-                <li><a href="introduction.html">Nuestro cine</a></li>
-                <li><a href="cartel.html">Cartelera</a></li>
-                <li><a href="contact.html">Contacto</a></li>
-            </ul>
-        </div>
-        <div>
-            <button class="btn-principal d-flex gap-2 align-items-center justify-content-center" type="button">
-                <i class="fa-solid fa-user"></i><span class="d-none d-md-inline">Log In</span>
-            </button>
-        </div>
-    </header>
-
-    <div id="cover-image">
-        <div class="d-flex flex-column justify-content-center align-items-center text-center h-100">
-            <h1 id="section-title"><img src="/media/logos/min-gold.png"></h1>
-            <h5 id="section-subtitle"></h5>
-        </div>
+<body x-data="{ tab: 'home' }" class="font-sans text-white">
+    <div
+        class="elemento-fijo bg-primary/50 text-white/50 text-2xl h-16 w-16 flex items-end justify-start p-6 hover:h-24 hover:w-24 hover:text-3xl hover:p-10 hover:bg-primary/100 hover:text-white/100">
+        <i class="fa-solid fa-cart-shopping "></i>
     </div>
 
-    <div id="overlay" class="overlay" style="display: none;"></div>
+    <nav id="sidebarNav" class="fixed top-1/2 left-0 -translate-y-1/2 flex flex-col bg-primary/50 p-4 rounded-r-[10px] shadow-[2px_0_8px_rgba(0,0,0,1)] z-100
+            transition-all duration-300 ease-in-out ">
+        <button @click="tab = 'user'"
+            class="bg-transparent border-none text-white py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
+            Clientes
+        </button>
+        <hr class="w-3/4">
+        <button @click="tab = 'home'"
+            class="bg-transparent border-none text-white py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
+            Inicio
+        </button>
+        <button @click="tab = 'cartelera'"
+            class="bg-transparent border-none text-white  py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
+            Cartelera
+        </button>
+        <button @click="tab = 'contact'"
+            class="bg-transparent border-none text-white py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
+            Contacto
+        </button>
+    </nav>
 
-    <main>
-        
+    <main class="flex flex-col justify-center w-full overflow-x-hidden">
+        <!-- HOME -->
+        <section x-show="tab === 'home'" x-transition x-cloak>
+            <!-- Hero -->
+            <div class="flex items-center justify-center min-h-screen text-white px-4">
+                <div class="w-full max-w-6xl space-y-6">
+                    <div class="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+                        <div class="w-full h-full bg-no-repeat bg-contain bg-center"
+                            style="background-image: url('./media/logos/nobg-gold.png');">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="text-2xl sm:text-3xl text-center sm:text-left">
+                            Si una imagen vale más que mil palabras... <br>
+                            <span class="underline underline-offset-4 decoration-primary decoration-5">
+                                ¿cuánto vale una película?
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <section class="bg-gray-900 py-10 px-4 sm:px-6 flex flex-col justify-center items-center gap-y-25 pb-12">
+                <div
+                    class="max-w-6xl flex flex-col md:flex-row items-center justify-center  text-white w-full pt-15 mt-15">
+                    <div class="flex-1">
+                        <p class="text-2xl sm:text-4xl lg:text-5xl text-center md:text-left">
+                            Vive la experiencia completa del cine: estrenos, clásicos y películas para todos los gustos,
+                            siempre al día y al alcance de un clic.
+                        </p>
+                    </div>
+
+                    <div class="flex-shrink-0 w-full md:w-[640px] aspect-video rounded-xl overflow-hidden mt-6 md:mt-0">
+                        <div class="w-full h-full bg-no-repeat bg-contain bg-center mask-l-from-50% mask-l-to-90%"
+                            style="background-image: url('./media/cover-1.jpg');">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-6xl flex items-center justify-center gap-x-25 text-white w-3/4 px-2 pt-15 mt-15">
+                    <iframe class="w-1/2 max-w-4xl h-[300px] sm:h-[400px] rounded-2xl shadow-lg"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.018682112416!2d2.1716063154210654!3d41.38385877926383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2f264a12b87%3A0xd0a3c01a68e4e9c3!2sCarrer%20del%20Pi%2C%205%2C%2008002%20Barcelona!5e0!3m2!1ses!2ses!4v1716726400000!5m2!1ses!2ses"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <p class="text-3xl sm:text-5xl text-end w-1/2">
+                        Encuéntranos en
+                        <span class="text-primary font-medium">
+                            Carrer del Pi, 5, 08002 Barcelona
+                        </span>
+                    </p>
+                </div>
+            </section>
+        </section>
+
+
+    
+
+        <!-- CARTELERA -->
+        <section x-show="tab === 'cartelera'" x-transition x-cloak>
+            <div class="flex items-center justify-center min-h-screen text-white px-4">
+                <div class="w-full max-w-6xl space-y-6">
+                    <div class="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+                        <div class="w-full h-full bg-no-repeat bg-contain bg-center"
+                            style="background-image: url('./media/logos/nobg-white.png');">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="text-2xl sm:text-3xl text-center sm:text-left">
+                            Descúbre,
+                            <span class="underline underline-offset-4 decoration-primary decoration-5 italic">
+                                disfruta
+                            </span>
+
+                            de las películas
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="bg-gray-900 py-10 flex justify-center pb-12" id="carteleraPin">
+
+                <div id="grid-cartel" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8">
+                    <!-- Películas aquí -->
+                </div>
+            </section>
+        </section>
+
+        <!-- CONTACTO -->
+        <section x-show="tab === 'contact'" x-transition x-cloak>
+            <div class="flex items-center justify-center min-h-screen text-white px-6">
+                <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8 pb-12">
+                    <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
+                    <form class="space-y-6" novalidate>
+                        <div>
+                            <label for="nombre" class="block mb-2 font-semibold">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre"
+                                class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+                                required>
+                        </div>
+                        <div>
+                            <label for="correo" class="block mb-2 font-semibold">Correo electrónico</label>
+                            <input type="email" id="correo" name="correo" placeholder="Tu correo"
+                                class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+                                required>
+                        </div>
+                        <div>
+                            <label for="mensaje" class="block mb-2 font-semibold">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Tu mensaje"
+                                class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition resize-y"
+                                required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit"
+                                class="w-full py-3 rounded-lg bg-primary hover:bg-primary-dark transition font-semibold text-white shadow-md">
+                                Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TICKETS -->
+        <section x-show="tab === 'tickets'" x-transition x-cloak>
+            <div class="mt-16 mb-16">
+                <h1 id="movie-title" class="text-7xl font-bold mb-8 text-center"></h1>
+            </div>
+            <div
+                class="min-h-screen flex flex-col justify-center items-center bg-gray-900 px-6 py-10 text-white mx-auto">
+
+                <div class="flex flex-col lg:flex-row gap-10 w-3/4 justify-around">
+                    <div class="flex-1 flex flex-col justify-evenly">
+                        <p id="movie-description" class="mb-6 text-gray-300 text-2xl leading-relaxed"></p>
+
+                        <div class="space-y-3 mb-8 text-gray-200 text-2xl">
+                            <p><span class="font-semibold text-primary">Director:</span> <span
+                                    id="movie-director"></span></p>
+                            <p><span class="font-semibold text-primary">Duración:</span> <span
+                                    id="movie-duration"></span></p>
+                            <p><span class="font-semibold text-primary">Reparto:</span> <span id="movie-casting"></span>
+                            </p>
+                        </div>
+
+                        <div class="min-h-64">
+                            <h3 class="text-2xl font-semibold mb-4 text-white">Sesiones disponibles</h3>
+                            <div id="grid-sessions" class="gridgap-5 w-1/2">
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <img id="movie-img" src="" alt="Imagen de la película"
+                        class="w-full lg:w-1/3  rounded-2xl shadow-lg object-cover" />
+                </div>
+
+
+                <div id="sit-rows" class="mt-10 hidden w-3/4">
+                    <h2 class="text-3xl font-semibold mb-6">Selecciona tu asiento</h2>
+                    <div id="sit-grid" class="grid gap-3 p-6 bg-gray-800 rounded-lg">
+                        <!-- Asientos -->
+                    </div>
+                    <div
+                        class="text-center mt-4 p-3 bg-gray-700 rounded-b-lg text-gray-300 font-semibold tracking-wide">
+                        Pantalla
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
-
-    <footer class="d-flex justify-content-between align-items-center p-5">
-        <div>
-            <ul class="list-unstyled d-flex flex-column justify-content-center gap-3 m-0">
-                <li><a>Cinefusion S.A 2025 ©</a></li>
-                <li><a>Política de cookies y privacidad.</a></li>
-            </ul>
+    <hr class="text-gray-800">
+    <footer class="bg-gray-900 text-white p-6 text-end flex items-center pt-12">
+        <div class="w-1/3 mx-auto px-20">
+            <img src="./media/logos/nobg-logo-white.png" class="h-32">
         </div>
-        <div>
-            <img src="media/logos/may-black.png" alt="Logo" class="logo-footer">
+        <div class="w-1/3 mx-auto text-xl">
+            <p>&#169 Cinefusion S.A</p> <span>Todos los derechos reservados.</span>
         </div>
     </footer>
 </body>
-
 
 </html>
