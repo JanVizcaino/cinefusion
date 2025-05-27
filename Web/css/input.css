@@ -19,6 +19,11 @@
 }
 
 @layer {
+
+    html {
+        scroll-behavior: smooth;
+    }
+
     [x-cloak] {
         display: none;
     }
@@ -63,10 +68,11 @@
         padding: 10px;
         border-radius: 8px;
         cursor: pointer;
+        width: auto;
         transition: background-color 0.3s;
     }
 
-    .session-date {
+    .session-date, .session-room {
         margin-top: 20px;
     }
 
@@ -84,4 +90,14 @@
         justify-content: center;
     }
 
+    .elemento-fijo {
+        position: fixed;
+        top: 0;
+        right: 0;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        border-bottom-left-radius: 10rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 }
