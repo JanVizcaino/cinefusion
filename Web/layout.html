@@ -42,30 +42,62 @@
     <main class="flex flex-col justify-center w-full overflow-x-hidden">
         <!-- HOME -->
         <section x-show="tab === 'home'" x-transition x-cloak>
-            <!-- Hero -->
-            <div class="flex items-center justify-center min-h-screen text-white px-4">
-                <div class="w-full max-w-6xl space-y-6">
-                    <div class="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
-                        <div class="w-full h-full bg-no-repeat bg-contain bg-center"
-                            style="background-image: url('./media/logos/nobg-gold.png');">
+            <div class="relative map-container w-full min-h-screen rounded-2xl overflow-hidden shadow-2xl">
+
+                <img class="h-screen w-full object-cover object-center" src="./media/map.png" alt="Mapa">
+
+                <div
+                    class="location-overlay absolute inset-0 flex flex-col items-center justify-center opacity-0 gap-5">
+
+                    <div class="flex items-center justify-center text-white p-8 h-1/3">
+                        <div class="w-full max-w-6xl space-y-6 h-full">
+                            <div class="w-full h-full aspect-video rounded-xl overflow-hidden">
+                                <div class="w-full h-full bg-no-repeat bg-contain bg-center"
+                                    style="background-image: url('./media/logos/nobg-gold.png');">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="w-1/2 text-primary my-10">
+                    <div class="location-content text-center text-white p-8">
+                        <div class="flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <h3 class="text-3xl font-bold">Visítanos</h3>
+
+                        </div>
+                        <p class="text-xl text-white mb-4">Carrer del Pi, 5</p>
+                        <p class="text-lg text-white">08002 Barcelona, España</p>
+                        <div class="mt-6">
+                            <button
+                                class="bg-primary/50 hover:bg-primary text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
+                                Cómo llegar
+                            </button>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <span class="text-2xl sm:text-3xl text-center sm:text-left">
-                            Si una imagen vale más que mil palabras... <br>
-                            <span class="underline underline-offset-4 decoration-primary decoration-5">
-                                ¿cuánto vale una película?
-                            </span>
-                        </span>
-                    </div>
                 </div>
             </div>
+            <!-- Hero -->
+
+            <div class="flex justify-center items-center gap-4 h-screen">
+                <span class="text-7xl text-center w-full">
+                    Donde las historias
+                    <span class="underline underline-offset-4 decoration-primary decoration-5">
+                        cobran vida.
+                    </span>
+                </span>
+            </div>
+
 
             <!-- Info Section -->
-            <section class="bg-gray-900 py-10 px-4 sm:px-6 flex flex-col justify-center items-center gap-y-25 pb-12">
+            <section
+                class="bg-gray-900 py-10 px-4 sm:px-6 flex flex-col justify-center items-center gap-y-25">
                 <div
-                    class="max-w-6xl flex flex-col md:flex-row items-center justify-center  text-white w-full pt-15 mt-15">
+                    class="max-w-6xl flex flex-col md:flex-row items-center justify-center  text-white w-full pt-15 mt-15 pb-15 mb-15">
                     <div class="flex-1">
                         <p class="text-2xl sm:text-4xl lg:text-5xl text-center md:text-left">
                             Vive la experiencia completa del cine: estrenos, clásicos y películas para todos los gustos,
@@ -73,50 +105,36 @@
                         </p>
                     </div>
 
-                    <div class="flex-shrink-0 w-full md:w-[640px] aspect-video rounded-xl overflow-hidden mt-6 md:mt-0">
+                    <div
+                        class="flex-shrink-0 w-full h-full md:w-[640px] aspect-video rounded-xl overflow-hidden mt-6 md:mt-0">
                         <div class="w-full h-full bg-no-repeat bg-contain bg-center mask-l-from-50% mask-l-to-90%"
-                            style="background-image: url('./media/cover-1.jpg');">
+                            style="background-image: url('./media/cover-2.jpg');">
                         </div>
                     </div>
                 </div>
 
-                <div class="max-w-6xl flex items-center justify-center gap-x-25 text-white w-3/4 px-2 pt-15 mt-15">
-                    <iframe class="w-1/2 max-w-4xl h-[300px] sm:h-[400px] rounded-2xl shadow-lg"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.018682112416!2d2.1716063154210654!3d41.38385877926383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2f264a12b87%3A0xd0a3c01a68e4e9c3!2sCarrer%20del%20Pi%2C%205%2C%2008002%20Barcelona!5e0!3m2!1ses!2ses!4v1716726400000!5m2!1ses!2ses"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                    <p class="text-3xl sm:text-5xl text-end w-1/2">
-                        Encuéntranos en
-                        <span class="text-primary font-medium">
-                            Carrer del Pi, 5, 08002 Barcelona
-                        </span>
-                    </p>
-                </div>
             </section>
         </section>
 
 
-    
+
 
         <!-- CARTELERA -->
         <section x-show="tab === 'cartelera'" x-transition x-cloak>
             <div class="flex items-center justify-center min-h-screen text-white px-4">
                 <div class="w-full max-w-6xl space-y-6">
-                    <div class="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
-                        <div class="w-full h-full bg-no-repeat bg-contain bg-center"
-                            style="background-image: url('./media/logos/nobg-white.png');">
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <span class="text-2xl sm:text-3xl text-center sm:text-left">
-                            Descúbre,
-                            <span class="underline underline-offset-4 decoration-primary decoration-5 italic">
-                                disfruta
+                    <div class="flex flex-col justify-between items-center gap-4">
+                        <span class="text-7xl text-left">
+                            Si una imagen vale más que mil palabras... <br>
+                            <span class="underline underline-offset-4 decoration-primary decoration-5">
+                                ¿cuánto vale una película?
                             </span>
-
-                            de las películas
                         </span>
+                        <div class="flex items-start w-full">
+                            <span class="text-2xl text-left italic">
+                                Vive cada historia como si fuera tuya.
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,7 +206,7 @@
                         <div class="min-h-64">
                             <h3 class="text-2xl font-semibold mb-4 text-white">Sesiones disponibles</h3>
                             <div id="grid-sessions" class="gridgap-5 w-1/2">
-                                
+
                             </div>
                         </div>
 
@@ -213,11 +231,11 @@
 
     </main>
     <hr class="text-gray-800">
-    <footer class="bg-gray-900 text-white p-6 text-end flex items-center pt-12">
-        <div class="w-1/3 mx-auto px-20">
+    <footer class="bg-gray-900 text-white p-6 text-end flex items-center justify-between pt-12">
+        <div class="w-1/3 px-0">
             <img src="./media/logos/nobg-logo-white.png" class="h-32">
         </div>
-        <div class="w-1/3 mx-auto text-xl">
+        <div class="w-1/3 text-xl">
             <p>&#169 Cinefusion S.A</p> <span>Todos los derechos reservados.</span>
         </div>
     </footer>

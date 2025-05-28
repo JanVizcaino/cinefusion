@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-
     loadMovies();
-
 });
 
 function loadMovies() {
