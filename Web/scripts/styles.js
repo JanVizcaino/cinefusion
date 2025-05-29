@@ -42,7 +42,7 @@ function navToggler() {
             } else if (iconClass === 'fa-solid fa-envelope') {
                 button.textContent = 'Contacto';
             } else if (iconClass === 'fa-solid fa-circle-user'){
-                button.textContent = 'Clientes';
+                button.textContent = 'Cliente';
             }
         });
     });
@@ -60,7 +60,7 @@ function navToggler() {
                     button.innerHTML = '<i class="fa-solid fa-film"></i>';
                 } else if (text === 'Contacto') {
                     button.innerHTML = '<i class="fa-solid fa-envelope"></i>';
-                } else if (text === 'Clientes'){
+                } else if (text === 'Cliente'){
                     button.innerHTML = '<i class="fa-solid fa-circle-user"></i>';  
                 }
             });
@@ -80,7 +80,7 @@ function navToggler() {
                     button.innerHTML = '<i class="fa-solid fa-film"></i>';
                 } else if (text === 'Contacto') {
                     button.innerHTML = '<i class="fa-solid fa-envelope"></i>';
-                } else if (text === 'Clientes'){
+                } else if (text === 'Cliente'){
                     button.innerHTML = '<i class="fa-solid fa-circle-user"></i>';  
                 }
             });
@@ -97,7 +97,7 @@ function navToggler() {
                 } else if (iconClass === 'fa-solid fa-envelope') {
                     button.textContent = 'Contacto';
                 } else if (iconClass === 'fa-solid fa-circle-user'){
-                    button.textContent = 'Clientes';
+                    button.textContent = 'Cliente';
                 }
             });
         }
@@ -122,7 +122,7 @@ function chartToggler(){
     }
 
     iconCarrito.addEventListener('click', function(event){
-        event.stopPropagation(); // Evita que el click llegue al document
+        event.stopPropagation(); 
         if(menuCarrito.classList.contains("w-0")){
             mostrarCarrito();
         } else {

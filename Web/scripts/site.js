@@ -270,12 +270,10 @@ function seleccionarAsiento(seat, session) {
     const seatIndex = selectedSeats.findIndex(s => s.id_seat === seat.id_seat);
 
     if (seatIndex > -1) {
-        // Deseleccionar asiento
         selectedSeats.splice(seatIndex, 1);
         seatIcon.classList.remove("text-primary", "bg-primary/20");
         seatIcon.classList.add("text-gray-400", "hover:text-primary");
     } else {
-        // Seleccionar asiento
         selectedSeats.push({
             ...seat,
             session: session,
@@ -324,13 +322,11 @@ function updateCartDisplay() {
     carritoTotal.textContent = `${total.toFixed(2)}€`;
 }
 
-// Función para eliminar del carrito
 function removeFromCart(seatId) {
     const seatIndex = selectedSeats.findIndex(s => s.id_seat === seatId);
     if (seatIndex > -1) {
         selectedSeats.splice(seatIndex, 1);
 
-        // Actualizar visualmente el asiento
         const seatIcon = document.getElementById(`seat-${seatId}`);
         if (seatIcon) {
             seatIcon.classList.remove("text-primary", "bg-primary/20");
@@ -346,9 +342,18 @@ function formatDate(dateStr) {
     return `${day}/${month}/${year}`;
 }
 
+
 async function finalizarCompra() {
     if (selectedSeats.length === 0) {
         alert('Selecciona al menos un asiento');
+        return;
+    }
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!currentUser) {
+        alert('Debes iniciar sesión para realizar una compra');
+        Alpine.$data(document.querySelector('[x-data]')).tab = 'login';
         return;
     }
 
@@ -357,17 +362,8 @@ async function finalizarCompra() {
             id_buy: 0,
             date: null,
             total_price: selectedSeats.reduce((sum, seat) => sum + seat.price, 0),
-            user: {
-                id_user: 1,
-                name: "Cliente Existente",
-                email: "cliente@ejemplo.com",
-                password: "123456",
-                address: "Calle Falsa 123",
-                phone: "123456789"
-            }
+            user: currentUser 
         };
-
-
 
         const purchaseResponse = await fetch('http://172.17.40.12:8080/api/purchases', {
             method: 'POST',
@@ -433,3 +429,54 @@ document.addEventListener('DOMContentLoaded', function () {
         finalizarBtn.addEventListener('click', finalizarCompra);
     }
 });
+
+
+async function loginUser(event) {
+    event.preventDefault();
+
+    const correo = document.getElementById('correo').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('http://172.17.40.12:8080/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ correo, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('currentUser', JSON.stringify(data.user)); 
+        Alpine.$data(document.querySelector('[x-data]')).tab = 'cartelera';
+    } else {
+        alert(data.message || 'Error al iniciar sesión');
+    }
+}
+
+async function registerUser(event) {
+    event.preventDefault();
+
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('http://172.17.40.12:8080/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombre, correo, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        alert('Registro exitoso. Redirigiendo al login...');
+        Alpine.$data(document.querySelector('[x-data]')).tab = 'login';
+    } else {
+        alert(data.message || 'Error al registrarse');
+    }
+}
