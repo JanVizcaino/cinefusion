@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     appendVideo();
     navToggler();
-
-    document.getElementById('map-iframe').addEventListener('mouseenter', function() {
-        
-    })
+    chartToggler();
 });
 
 function appendVideo() {
@@ -107,3 +104,42 @@ function navToggler() {
     });
 }
 
+function chartToggler(){
+    const iconCarrito = document.getElementById('icon-carrito');
+    const menuCarrito = document.getElementById('menu-carrito');
+    const cerrarCarrito = document.getElementById('cerrar-carrito');
+
+    function mostrarCarrito() {
+        menuCarrito.classList.remove("w-0");
+        menuCarrito.classList.add("w-96", "border-l-4");
+        console.log("mostrar");
+    }
+
+    function ocultarCarrito() {
+        menuCarrito.classList.remove("w-96", "border-l-4");
+        menuCarrito.classList.add("w-0");
+        console.log("ocultar");
+    }
+
+    iconCarrito.addEventListener('click', function(event){
+        event.stopPropagation(); // Evita que el click llegue al document
+        if(menuCarrito.classList.contains("w-0")){
+            mostrarCarrito();
+        } else {
+            ocultarCarrito();
+        }
+    });
+
+    cerrarCarrito?.addEventListener('click', function(event){
+        event.stopPropagation();
+        ocultarCarrito();
+    });
+
+    document.addEventListener('click', function(event){
+        if (!menuCarrito.contains(event.target) && !iconCarrito.contains(event.target)) {
+            if (!menuCarrito.classList.contains("w-0")) {
+                ocultarCarrito();
+            }
+        }
+    });
+}
