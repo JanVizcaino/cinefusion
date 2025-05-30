@@ -2,11 +2,13 @@ package com.example_pgr.demo_pgr.services;
 
 import com.example_pgr.demo_pgr.model.Purchase;
 import com.example_pgr.demo_pgr.repository.PurchaseRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@Transactional
 public class PurchaseService {
     @Autowired
     private PurchaseRepository purchaseRepository;

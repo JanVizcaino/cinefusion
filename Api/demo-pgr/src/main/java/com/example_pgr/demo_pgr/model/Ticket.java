@@ -24,11 +24,12 @@ public class Ticket {
     private Purchase purchase;
 
     @ManyToOne
-    @JoinColumn(name = "id_session", referencedColumnName = "id_session")
+    @JoinColumn(name = "ID_SESSION", referencedColumnName = "ID_SESSION")
     private Sesion session;
 
-    @ManyToOne
-    @JoinColumn(name = "id_seat", referencedColumnName = "id_seat")
-    private Seat seat;
 
+
+    @ManyToOne
+    @JoinColumn(name = "ID_SEAT", referencedColumnName = "ID_SEAT")
+    private Seat seat;
 }

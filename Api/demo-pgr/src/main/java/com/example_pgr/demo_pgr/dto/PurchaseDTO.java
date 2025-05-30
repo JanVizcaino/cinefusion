@@ -17,4 +17,5 @@ public class PurchaseDTO {
     private LocalDate date;
     private Double total_price;
     private String client_name;
+    private int id_user;
 }

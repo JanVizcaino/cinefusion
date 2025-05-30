@@ -32,6 +32,7 @@ public class PurchaseController {
             dto.setId_buy(purchase.getId_buy());
             dto.setDate(purchase.getDate());
             dto.setTotal_price(purchase.getTotal_price());
+            dto.setId_user(purchase.getUser().getId_user());
             dto.setClient_name(purchase.getUser().getName());
 
             purchaseDTOS.add(dto);
@@ -53,6 +54,7 @@ public class PurchaseController {
         dto.setDate(purchase.getDate());
         dto.setTotal_price(purchase.getTotal_price());
         dto.setClient_name(purchase.getUser().getName());
+        dto.setId_user(purchase.getUser().getId_user());
 
         return ResponseEntity.ok(dto);
     }

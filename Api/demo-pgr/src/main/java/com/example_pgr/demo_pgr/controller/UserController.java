@@ -59,6 +59,29 @@ public class UserController {
         return ResponseEntity.ok(dto);
     }
 
+    // OBTENER USUARIO POR NOMBRE
+    @GetMapping("/name/{name}")
+    public ResponseEntity<UserDTO> getUserByName(@PathVariable String name) {
+        User user = userService.findByName(name);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UserDTO dto = mapToDTO(user);
+        return ResponseEntity.ok(dto);
+    }
+
+    private UserDTO mapToDTO(User user) {
+        UserDTO dto = new UserDTO();
+        dto.setId_user(user.getId_user());
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setPassword(user.getPassword());
+        dto.setAddress(user.getAddress());
+        dto.setPhone(user.getPhone());
+        return dto;
+    }
+
     // CREAR UN NUEVO USUARIO
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
