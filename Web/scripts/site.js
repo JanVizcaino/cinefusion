@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const finalizarBtn = document.querySelector('#menu-carrito button[class*="bg-primary"]');
     if (finalizarBtn) {
-        finalizarBtn.addEventListener('click', finalizarCompra);
+        finalizarBtn.addEventListener('click', pasareladePago);
     }
 });
 
@@ -71,7 +71,6 @@ function loadMovies() {
 }
 
 async function loadMovieInfo(id) {
-    // CORRECCIÓN: Ocultar y limpiar contenedor de asientos
     const sitContainer = document.getElementById("sit-rows");
     sitContainer.style.display = "none";
     sitContainer.classList.add("hidden");
@@ -79,7 +78,6 @@ async function loadMovieInfo(id) {
     const sitGrid = document.getElementById("sit-grid");
     sitGrid.innerHTML = "";
 
-    // Limpiar selección anterior
     selectedSeats = [];
     currentSession = null;
     updateCartDisplay();
@@ -196,12 +194,11 @@ function loadSessions(id) {
                             "text-black"
                         );
 
-                        sessionCard.innerHTML = `<p>${session.startTime} - ${session.endTime}</p>`;
+                        sessionCard.innerHTML = `<p>${session.startTime}`;
 
                         sessionCard.addEventListener("click", () => {
                             sitContainer.style.display = "block";
                             sitContainer.classList.remove("hidden");
-                            // CORRECCIÓN: Pasar el objeto session completo
                             loadSits(session.num_room, session);
                         });
 
@@ -274,8 +271,7 @@ async function loadSits(roomId, sessionData) {
                 seatIcon.title = "Clic para seleccionar";
 
                 seatIcon.addEventListener("click", () => seleccionarAsiento(seat, sessionData));
-                seatIcon.addEventListener("click", () => document.getElementById('menu-carrito').style.width = '400px');
-
+                seatIcon.addEventListener("click", () => document.getElementById('svg-cart').classList.add('fill-white'));
             }
 
             sitGrid.appendChild(seatIcon);
@@ -305,7 +301,6 @@ function seleccionarAsiento(seat, session) {
         seatIcon.classList.remove("text-gray-400", "hover:text-primary");
         seatIcon.classList.add("text-primary", "bg-primary/20");
     }
-
     updateCartDisplay();
 }
 
@@ -355,7 +350,6 @@ function removeFromCart(seatId) {
             seatIcon.classList.remove("text-primary", "bg-primary/20");
             seatIcon.classList.add("text-gray-400", "hover:text-primary");
         }
-
         updateCartDisplay();
     }
 }
@@ -365,6 +359,15 @@ function formatDate(dateStr) {
     return `${day}/${month}/${year}`;
 }
 
+function pasareladePago(){
+    document.getElementById('menu-carrito').style.width = '0px';
+    Alpine.$data(document.querySelector('[x-data]')).changeTab('payment');
+
+    const pagarBtn = document.getElementById('pagar');
+    if (pagarBtn) {
+        pagarBtn.addEventListener('click', finalizarCompra);
+    }
+}
 
 async function finalizarCompra() {
     if (selectedSeats.length === 0) {
@@ -376,8 +379,9 @@ async function finalizarCompra() {
 
     if (!currentUser) {
         document.getElementById('menu-carrito').style.width = '0px';
+        document.getElementById('carrito-contenido').innerHTML = `<p class="text-gray-400">No hay asientos seleccionados</p>`;
         alert('Debes iniciar sesión para realizar una compra');
-        Alpine.$data(document.querySelector('[x-data]')).tab = 'login';
+        Alpine.$data(document.querySelector('[x-data]')).changeTab('login');
         return;
     }
 
@@ -425,6 +429,7 @@ async function finalizarCompra() {
             }
         }
 
+        Alpine.$data(document.querySelector('[x-data]')).changeTab('home');
         alert('¡Compra realizada con éxito!');
         selectedSeats = [];
         updateCartDisplay();
@@ -477,7 +482,7 @@ async function loginUser(event) {
 
             showLoginInfo();
             updateView();
-            Alpine.$data(document.querySelector('[x-data]')).tab = 'cartelera';
+            Alpine.$data(document.querySelector('[x-data]')).changeTab('cartelera');
         } else {
             alert('Email o contraseña incorrectos');
         }

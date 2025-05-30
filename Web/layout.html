@@ -22,7 +22,7 @@
     <div id="icon-carrito" class="elemento-fijo bg-primary border-primary text-white h-18 w-18 flex items-start justify-end 
             hover:h-24 hover:w-24 transition-all duration-300 rounded-full shadow-lg cursor-pointer p-2">
 
-        <svg
+        <svg id="svg-cart"
             class="fill-none stroke-1 stroke-white h-2/3 w-2/3 hover:w-14 hover:fill-white transition-all duration-300">
             <use href="./media/assets/sprite.svg#cart"></use>
         </svg>
@@ -107,10 +107,12 @@
                         <p class="text-xl text-white mb-4">Carrer del Pi, 5</p>
                         <p class="text-lg text-white">08002 Barcelona, España</p>
                         <div class="mt-6">
+                            <a href="https://maps.app.goo.gl/J67kQ7VBr2THKizb7" target="_blank" rel="noopener noreferrer">
                             <button
                                 class="bg-primary/50 hover:bg-primary text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
                                 Cómo llegar
                             </button>
+                            </a>
                         </div>
                     </div>
 
@@ -229,7 +231,7 @@
 
                         <div class="min-h-64">
                             <h3 class="text-2xl font-semibold mb-4 text-white">Sesiones disponibles</h3>
-                            <div id="grid-sessions" class="gridgap-5 w-1/2">
+                            <div id="grid-sessions" class="gridgap-5 w-1/3">
 
                             </div>
                         </div>
@@ -239,8 +241,7 @@
                         class="w-full lg:w-1/3  rounded-2xl shadow-lg object-cover" />
                 </div>
 
-
-                <div id="sit-rows" class="mt-10 hidden w-3/4">
+                <div id="sit-rows" class="mt-10 hidden w-2/3 md:w-1/2">
                     <h2 class="text-3xl font-semibold mb-6">Selecciona tu asiento</h2>
                     <div id="sit-grid" class="grid gap-3 p-6 bg-gray-800 rounded-lg">
                     </div>
@@ -319,7 +320,8 @@
                             </button>
                         </div>
                         <div class="text-center mt-4">
-                            <a @click="changeTab('login')" class="text-primary hover:underline">¿Ya tienes cuenta? Inicia
+                            <a @click="changeTab('login')" class="text-primary hover:underline">¿Ya tienes cuenta?
+                                Inicia
                                 sesión</a>
                         </div>
                     </form>
@@ -328,7 +330,39 @@
 
         </section>
 
-
+        <section x-show="tab === 'payment'" x-transition x-cloak
+            class="bg-gray-900 py-10 px-4 sm:px-6 flex flex-col justify-center items-center gap-y-10 text-white min-h-screen">
+            
+            <div class="max-w-2xl w-full bg-gray-800 rounded-xl p-8 shadow-xl">
+                <h2 class="text-3xl font-bold text-center mb-6">Pago Seguro</h2>
+                <form x-on:submit.prevent="alert('¡Pago realizado con éxito!')" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-1" for="card-number">Número de tarjeta</label>
+                        <input id="card-number" type="text" placeholder="1234 5678 9012 3456"
+                            class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium mb-1" for="expiry">Fecha de expiración</label>
+                            <input id="expiry" type="text" placeholder="MM/AA"
+                                class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium mb-1" for="cvc">CVC</label>
+                            <input id="cvc" type="text" placeholder="123"
+                                class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1" for="name">Nombre en la tarjeta</label>
+                        <input id="name" type="text" placeholder="Tu nombre"
+                            class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded transition" id="pagar">Pagar</button>
+                </form>
+            </div>
+        </section>
 
     </main>
     <hr class="text-gray-800">
