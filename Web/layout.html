@@ -12,7 +12,13 @@
     <link rel="stylesheet" href="./css/output.css">
 </head>
 
-<body x-data="{ tab: 'home' }" class="font-sans text-white">
+<body x-data="{ 
+    tab: 'home',
+    changeTab(newTab) {
+        this.tab = newTab;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}" class="font-sans text-white">
     <div id="icon-carrito" class="elemento-fijo bg-primary border-primary text-white h-18 w-18 flex items-start justify-end 
             hover:h-24 hover:w-24 transition-all duration-300 rounded-full shadow-lg cursor-pointer p-2">
 
@@ -34,13 +40,7 @@
         </div>
 
         <div id="carrito-contenido" class="p-4 space-y-4 max-h-[calc(100%-150px)] overflow-y-auto text-white">
-            <div class="flex items-center justify-between border-b border-primary pb-2">
-                <div>
-                    <p class="font-semibold">Producto 1</p>
-                    <p class="text-sm text-primary">Cantidad: 2</p>
-                </div>
-                <p class="font-semibold text-primary">20.00€</p>
-            </div>
+            <p>¡Todavía no tienes nada en el carrito!</p>
         </div>
 
         <div class="absolute bottom-0 w-full p-4 border-t border-primary bg-gray-900">
@@ -56,27 +56,26 @@
 
     <nav id="sidebarNav" class="fixed top-1/2 left-0 -translate-y-1/2 flex flex-col bg-primary/95 p-4 rounded-r-[10px] shadow-xs z-100
             transition-all duration-300 ease-in-out ">
-        <button @click="tab = 'login'"
+        <button @click="changeTab('login')"
             class="bg-transparent border-none text-white py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
             Cliente
         </button>
         <hr class="w-3/4">
-        <button @click="tab = 'home'"
+        <button @click="changeTab('home')"
             class="bg-transparent border-none text-white py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
             Inicio
         </button>
-        <button @click="tab = 'cartelera'"
+        <button @click="changeTab('cartelera')"
             class="bg-transparent border-none text-white  py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
             Cartelera
         </button>
-        <button @click="tab = 'contact'"
+        <button @click="changeTab('contacto')"
             class="bg-transparent border-none text-white py-2.5 text-start text-base cursor-pointer transition duration-300 hover:text-gray-300 hover:underline focus:outline-none focus:text-gray-400">
             Contacto
         </button>
     </nav>
 
     <main class="flex flex-col justify-center w-full overflow-x-hidden">
-        <!-- HOME -->
         <section x-show="tab === 'home'" x-transition x-cloak>
             <div class="relative map-container w-full min-h-screen overflow-hidden shadow-2xl">
 
@@ -117,7 +116,6 @@
 
                 </div>
             </div>
-            <!-- Hero -->
 
             <div class="flex justify-center items-center gap-4 h-screen">
                 <span class="text-7xl text-center w-full">
@@ -128,8 +126,6 @@
                 </span>
             </div>
 
-
-            <!-- Info Section -->
             <section class="bg-gray-900 py-10 px-4 sm:px-6 flex flex-col justify-center items-center gap-y-25">
                 <div
                     class="max-w-6xl flex flex-col md:flex-row items-center justify-center  text-white w-full pt-15 mt-15 pb-15 mb-15">
@@ -151,10 +147,6 @@
             </section>
         </section>
 
-
-
-
-        <!-- CARTELERA -->
         <section x-show="tab === 'cartelera'" x-transition x-cloak>
             <div class="flex items-center justify-center min-h-screen text-white px-4">
                 <div class="w-full max-w-6xl space-y-6">
@@ -175,28 +167,26 @@
             </div>
 
             <section class="bg-gray-900 py-10 flex justify-center pb-12" id="carteleraPin">
-
                 <div id="grid-cartel" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-8">
-                    <!-- Películas aquí -->
                 </div>
             </section>
         </section>
 
-        <!-- CONTACTO -->
-        <section x-show="tab === 'contact'" x-transition x-cloak>
+        <section x-show="tab === 'contacto'" x-transition x-cloak>
             <div class="flex items-center justify-center min-h-screen text-white px-6">
                 <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8 pb-12">
                     <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
-                    <form class="space-y-6" novalidate>
+                    <form class="space-y-6" novalidate id="contact-form" action="https://formspree.io/f/mrbkzeyo"
+                        method="POST">
                         <div>
                             <label for="nombre" class="block mb-2 font-semibold">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre"
+                            <input type="text" id="nombreContacto" name="nombre" placeholder="Tu nombre"
                                 class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
                                 required>
                         </div>
                         <div>
                             <label for="correo" class="block mb-2 font-semibold">Correo electrónico</label>
-                            <input type="email" id="correo" name="correo" placeholder="Tu correo"
+                            <input type="email" id="correoContacto" name="correo" placeholder="Tu correo"
                                 class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
                                 required>
                         </div>
@@ -217,7 +207,6 @@
             </div>
         </section>
 
-        <!-- TICKETS -->
         <section x-show="tab === 'tickets'" x-transition x-cloak>
             <div class="mt-16 mb-16">
                 <h1 id="movie-title" class="text-7xl font-bold mb-8 text-center"></h1>
@@ -254,7 +243,6 @@
                 <div id="sit-rows" class="mt-10 hidden w-3/4">
                     <h2 class="text-3xl font-semibold mb-6">Selecciona tu asiento</h2>
                     <div id="sit-grid" class="grid gap-3 p-6 bg-gray-800 rounded-lg">
-                        <!-- Asientos -->
                     </div>
                     <div
                         class="text-center mt-4 p-3 bg-gray-700 rounded-b-lg text-gray-300 font-semibold tracking-wide">
@@ -266,18 +254,18 @@
 
         <section x-show="tab === 'login'" x-transition x-cloak>
             <div class="flex items-center justify-center min-h-screen text-white px-6">
-                <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8 pb-12">
+                <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8 pb-12" id="login-container">
                     <h2 class="text-3xl font-bold text-center mb-8">Iniciar Sesión</h2>
                     <form id="login-form" class="space-y-5" onsubmit="loginUser(event)">
                         <div>
-                            <label for="correo" class="block mb-2 font-semibold">Correo electrónico</label>
-                            <input type="email" id="correo" name="correo" placeholder="Tu correo"
+                            <label for="correoLogin" class="block mb-2 font-semibold">Correo electrónico</label>
+                            <input type="email" id="correoLogin" name="correoLogin" placeholder="Tu correo"
                                 class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
                                 required>
                         </div>
                         <div>
-                            <label for="password" class="block mb-2 font-semibold">Contraseña</label>
-                            <input type="password" id="password" name="password" placeholder="Tu contraseña"
+                            <label for="passwordLogin" class="block mb-2 font-semibold">Contraseña</label>
+                            <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Tu contraseña"
                                 class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
                                 required>
                         </div>
@@ -288,12 +276,16 @@
                             </button>
                         </div>
                         <div class="text-center mt-4">
-                            <a @click="tab = 'register'" class="text-primary hover:underline">¿No tienes cuenta?
+                            <a @click="changeTab('register')" class="text-primary hover:underline">¿No tienes cuenta?
                                 Regístrate</a>
                         </div>
                     </form>
                 </div>
+                <div id="logged-in-container" class="hidden p-6">
+                    <p>¡Estás logueado con <span id="logged-email"></span>!</p>
+                </div>
             </div>
+
         </section>
 
         <section x-show="tab === 'register'" x-transition x-cloak>
@@ -308,16 +300,17 @@
                                 required>
                         </div>
                         <div>
-                            <label for="correo" class="block mb-2 font-semibold">Correo electrónico</label>
-                            <input type="email" id="correo" name="correo" placeholder="Tu correo"
+                            <label for="correoRegister" class="block mb-2 font-semibold">Correo electrónico</label>
+                            <input type="email" id="correoRegister" name="correoRegister" placeholder="Tu correo"
                                 class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
                                 required>
                         </div>
                         <div>
-                            <label for="password" class="block mb-2 font-semibold">Contraseña</label>
-                            <input type="password" id="password" name="password" placeholder="Tu contraseña"
+                            <label for="passwordRegister" class="block mb-2 font-semibold">Contraseña</label>
+                            <input type="password" id="passwordRegister" name="passwordRegister"
+                                placeholder="Tu contraseña"
                                 class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
-                                required>
+                                required type="password">
                         </div>
                         <div class="text-center">
                             <button type="submit"
@@ -326,7 +319,7 @@
                             </button>
                         </div>
                         <div class="text-center mt-4">
-                            <a @click="tab = 'login'" class="text-primary hover:underline">¿Ya tienes cuenta? Inicia
+                            <a @click="changeTab('login')" class="text-primary hover:underline">¿Ya tienes cuenta? Inicia
                                 sesión</a>
                         </div>
                     </form>
@@ -334,6 +327,8 @@
             </div>
 
         </section>
+
+
 
     </main>
     <hr class="text-gray-800">
