@@ -36,7 +36,7 @@ public class Sesion {
     private LocalTime endTime;
 
     @ManyToOne
-    @JoinColumn(name = "NUM_ROOM", referencedColumnName = "NUM_ROOM") // o "id_room" si así se llama en Room
+    @JoinColumn(name = "NUM_ROOM", referencedColumnName = "NUM_ROOM")
     private Room room;
 
     @ManyToOne

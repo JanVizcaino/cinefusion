@@ -25,6 +25,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+
     public boolean deleteById(Integer id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);

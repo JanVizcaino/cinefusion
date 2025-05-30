@@ -63,24 +63,35 @@ public class SeatController {
         return ResponseEntity.ok(dto);
     }
 
-    //CREAR UN NUEVO ASIENTO
+//CREAR UN NUEVO ASIENTO
     @PostMapping
     public ResponseEntity<SeatDTO> addSeat(@RequestBody SeatDTO seatDTO) {
         Cine cine = cineService.findById(seatDTO.getId_cine());
         if (cine == null) {
             return ResponseEntity.badRequest().body(null);
         }
+
         Room room = roomService.findById(seatDTO.getNum_room());
         if (room == null) {
             return ResponseEntity.badRequest().body(null);
         }
+
         Seat seat = new Seat();
         seat.setRoom(room);
         seat.setCine(cine);
         seat.setRow_num(seatDTO.getRow_num());
         seat.setCol_num(seatDTO.getCol_num());
-        seatService.saveSeat(seat);
-        return new ResponseEntity<>(seatDTO, HttpStatus.CREATED);
+
+        Seat savedSeat = seatService.saveSeat(seat);
+
+        SeatDTO responseDTO = new SeatDTO();
+        responseDTO.setId_seat(savedSeat.getId_seat());
+        responseDTO.setNum_room(savedSeat.getRoom() != null ? savedSeat.getRoom().getNum_room() : 0);
+        responseDTO.setId_cine(savedSeat.getCine().getId_cine());
+        responseDTO.setRow_num(savedSeat.getRow_num());
+        responseDTO.setCol_num(savedSeat.getCol_num());
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
     //ACTUALIZAR UN ASIENTO EXISTENTE
@@ -111,5 +122,4 @@ public class SeatController {
         seatService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
 }
